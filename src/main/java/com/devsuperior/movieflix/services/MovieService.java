@@ -1,6 +1,7 @@
 package com.devsuperior.movieflix.services;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.dto.MovieReviewDTO;
 import com.devsuperior.movieflix.entities.Genre;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.repositories.GenreRepository;
@@ -33,6 +34,7 @@ public class MovieService {
         return new MovieDTO(movie, genre);
     }
 
+
     @Transactional(readOnly = true)
     public Page<MovieDTO> findByGenre(Long genreId, Pageable pageable){
         Genre genre = (genreId == 0) ? null : genreRepository.getOne(genreId);
@@ -40,5 +42,13 @@ public class MovieService {
         repository.findMoviesWithGenres(page.getContent());
         return page.map(m -> new MovieDTO(m, m.getGenre()));
     }
+
+    @Transactional(readOnly = true)
+    public MovieReviewDTO movieWithReviews(Long movieId){
+        Optional<Movie> obj = repository.findById(movieId);
+        var movie = obj.orElseThrow(()-> new ResourceNotFoundException("Id " + movieId + " Does Not Exists"));
+        return new MovieReviewDTO(movie, movie.getReviews());
+    }
+
 
 }

@@ -5,34 +5,20 @@ import com.devsuperior.movieflix.entities.Review;
 import java.io.Serializable;
 
 public class ShortReviewResponseDTO implements Serializable {
-
-    private Long id;
     private String Text;
-    private Long movieId;
-    private ShortUserDTO user;
+    private String userName;
 
     public ShortReviewResponseDTO() {
     }
 
-    public ShortReviewResponseDTO(Long id, String text, Long movieId, ShortUserDTO user) {
-        this.id = id;
+    public ShortReviewResponseDTO(String text, String userName) {
         Text = text;
-        this.user = user;
+        this.userName = userName;
     }
 
     public ShortReviewResponseDTO(Review review) {
-        id = review.getId();
         Text = review.getText();
-        movieId = review.getMovie().getId();
-        user = new ShortUserDTO(review.getUser());
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        userName = review.getUser().getName();
     }
 
     public String getText() {
@@ -43,19 +29,11 @@ public class ShortReviewResponseDTO implements Serializable {
         Text = text;
     }
 
-    public Long getMovieId() {
-        return movieId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setMovieId(Long movieId) {
-        this.movieId = movieId;
-    }
-
-    public ShortUserDTO getUser() {
-        return user;
-    }
-
-    public void setUser(ShortUserDTO user) {
-        this.user = user;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

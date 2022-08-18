@@ -1,6 +1,7 @@
 package com.devsuperior.movieflix.resources;
 
 import com.devsuperior.movieflix.dto.MovieDTO;
+import com.devsuperior.movieflix.dto.MovieReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +24,6 @@ public class MovieResource {
         return ResponseEntity.ok().body(movie);
     }
 
-    @GetMapping("/{id}/reviews")
-    public ResponseEntity<MovieDTO> reviewsPerMovie(@PathVariable Long id) {
-
-        MovieDTO movie = service.findById(id);
-        return ResponseEntity.ok().body(movie);
-    }
 
     @GetMapping
     public ResponseEntity<Page<MovieDTO>> findByGenre(
@@ -39,5 +34,11 @@ public class MovieResource {
         return ResponseEntity.ok().body(page);
     }
 
+
+    @GetMapping("/{movieId}/reviews")
+    public ResponseEntity<MovieReviewDTO> movieWithReviews(@PathVariable Long movieId) {
+        MovieReviewDTO movie = service.movieWithReviews(movieId);
+        return ResponseEntity.ok().body(movie);
+    }
 
 }

@@ -24,6 +24,15 @@ public class MovieDTO {
         this.genre = genre;
     }
 
+    public MovieDTO(Movie movie) {
+        id = movie.getId();
+        title = movie.getTitle();
+        subTitle = movie.getSubTitle();
+        year = movie.getYear();
+        imgUrl = movie.getImgUrl();
+        synopsis = movie.getSynopsis();
+    }
+
     public MovieDTO(Movie movie, Genre genre) {
         id = movie.getId();
         title = movie.getTitle();
